@@ -1,0 +1,12 @@
+[Unit]
+Description=Local system resume actions
+After=suspend.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/systemctl restart ayaled.service
+# geek 唤醒重新加载触摸屏驱动
+ExecStartPost=/usr/bin/modprobe -r goodix_ts ; /usr/bin/modprobe goodix_ts
+
+[Install]
+WantedBy=suspend.target
